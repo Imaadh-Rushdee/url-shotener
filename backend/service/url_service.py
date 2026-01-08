@@ -5,11 +5,11 @@ from nanoid import generate
 def get_all_urls():
     return get_all_modal()  
 #Shorten URL
-def url_shotener(url):
+def url_shotener(url,name=None):
     nanoid = generate(size=5)
     short_url = "http://shorturl/" + nanoid
     print(short_url)
-    return shorten_url_modal(url, short_url)
+    return shorten_url_modal(url, short_url, name)
 
 #Delete URL
 def delete_url(id):

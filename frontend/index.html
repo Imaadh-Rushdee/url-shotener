@@ -5,11 +5,24 @@
     </head>
     <body>
         <input id="shortUrl" type="text">
+        <input id="shortUrlName" type="text">
         <button type="button" id="short_btn">Shorten URL</button>
         <p>Shortened URL: </p><p id="result"></p>
         <br>
-        <br>
         <input id="getUrl" type="text">
         <button type="button" id="get_btn">Get URL</button>
+        <br>
+        <br>
+        <table id="URLtable" style="table-layout: fixed; border-spacing: 20px;">
+            <thead>
+                <tr>
+                    <th>URL Name</th>
+                    <th>Original URL</th>
+                    <th>Short URL</th>
+                </tr>
+            </thead>
+            <tbody id="urlTableBody">
+            </tbody>
+        </table>
     </body>
 </html>

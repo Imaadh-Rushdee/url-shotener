@@ -14,6 +14,10 @@ CREATE TABLE IF NOT EXISTS urls (
     shorten_url TEXT NOT NULL UNIQUE
 )
 """)
+cursor.execute("""
+ALTER TABLE urls
+ADD COLUMN name TEXT
+""")
 
 # Commit changes to save them
 conn.commit()

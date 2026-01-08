@@ -4,6 +4,7 @@ from pydantic import BaseModel
 
 class URLRequest(BaseModel):
     url: str = None
+    name: str = None
     short_url: str = None
 
 router = APIRouter()
@@ -15,7 +16,7 @@ def get_all_url_controller():
 @router.post('/shorten')
 def shorten_url(data: URLRequest):
     print(data.url)
-    return url_shotener(data.url)
+    return url_shotener(data.url, data.name)
 
 @router.delete('/delete/{id}')
 def delete_url_controller(id):

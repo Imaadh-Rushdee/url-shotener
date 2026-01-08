@@ -2,26 +2,31 @@ import sqlite3
 import json
 import uuid
 
-keys = ['id', 'url_id', 'original_url', 'shorten_url']
+keys = ['id', 'url_id', 'original_url', 'shorten_url', 'name']
 
 def get_all_modal():
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM urls")
     rows = cursor.fetchall()
-    result_data = dict(zip(keys, rows))
-    json_data = json.dumps(result_data)
-    return json_data
+
+    result_data = [
+        dict(zip(keys, row))
+        for row in rows
+    ]
+
+    conn.close()
+    return json.dumps(result_data)
 
 #Shorten URL
-def shorten_url_modal(url, short_url):
+def shorten_url_modal(url, short_url, name=None):
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
     unqiue_id = str(uuid.uuid4())[:8]
     print(url)
     print(short_url)
     print(unqiue_id)
-    cursor.execute("INSERT INTO urls (url_id, original_url, shorten_url) VALUES (?, ?, ?)", (unqiue_id, url, short_url))
+    cursor.execute("INSERT INTO urls (url_id, original_url, shorten_url, name) VALUES (?, ?, ?, ?)", (unqiue_id, url, short_url, name))
     conn.commit()
     cursor.execute("SELECT * FROM urls WHERE url_id = ?", (unqiue_id,))
     row = cursor.fetchone()
